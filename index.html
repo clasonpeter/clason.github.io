@@ -8,17 +8,17 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --black:#050505;
-  --white:#EFEFEF;
-  --chrome-1:#E8E8E8;
-  --chrome-2:#B8B8B8;
-  --chrome-3:#888888;
-  --chrome-4:#555555;
-  --chrome-5:#2C2C2C;
-  --chrome-6:#1A1A1A;
-  --card:#0D0D0D;
-  --border:#222222;
-  --border-light:#333333;
+  --black:#F5F5F5;
+  --white:#1A1A1A;
+  --chrome-1:#1A1A1A;
+  --chrome-2:#2E2E2E;
+  --chrome-3:#555555;
+  --chrome-4:#6B6B6B;
+  --chrome-5:#C8C8C8;
+  --chrome-6:#E0E0E0;
+  --card:#FFFFFF;
+  --border:#DCDCDC;
+  --border-light:#C8C8C8;
 }
 html{scroll-behavior:smooth;}
 body{
@@ -52,7 +52,7 @@ nav{
   display:flex;justify-content:space-between;align-items:center;
   padding:1.5rem 3rem;
   border-bottom:1px solid var(--border);
-  background:rgba(5,5,5,0.92);
+  background:rgba(245,245,245,0.92);
   backdrop-filter:blur(24px);
 }
 .nav-logo{
@@ -83,7 +83,7 @@ nav{
   font-size:clamp(10rem,20vw,26rem);
   letter-spacing:0.04em;
   color:transparent;
-  -webkit-text-stroke:1px rgba(255,255,255,0.04);
+  -webkit-text-stroke:1px rgba(0,0,0,0.04);
   white-space:nowrap;
   top:50%;transform:translateY(-50%);
   left:-1%;
@@ -134,7 +134,7 @@ nav{
   transition:all 0.25s;
 }
 .btn-primary{background:var(--white);color:var(--black);border:1px solid var(--white);}
-.btn-primary:hover{background:transparent;color:var(--white);}
+.btn-primary:hover{background:transparent;color:var(--white);border-color:var(--white);}
 .btn-ghost{background:transparent;color:var(--chrome-3);border:1px solid var(--border-light);}
 .btn-ghost:hover{border-color:var(--chrome-3);color:var(--white);}
 
@@ -246,83 +246,6 @@ nav{
   transition:color 0.2s,transform 0.2s;
 }
 .project-item:hover .proj-arrow{color:var(--chrome-2);transform:translateX(4px);}
-
-/* ── SPLASH SCREEN ── */
-#splash{
-  position:fixed;inset:0;z-index:99999;
-  background:var(--black);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  pointer-events:all;
-  transition:opacity 0.8s ease 0.2s, visibility 0.8s ease 0.2s;
-}
-#splash.hidden{opacity:0;visibility:hidden;pointer-events:none;}
-
-.splash-top, .splash-bottom{
-  position:absolute;left:0;right:0;height:50%;
-  background:var(--black);
-  transition:transform 0.9s cubic-bezier(0.76,0,0.24,1);
-  z-index:2;
-}
-.splash-top{top:0;transform-origin:top;}
-.splash-bottom{bottom:0;transform-origin:bottom;}
-#splash.hidden .splash-top{transform:translateY(-100%);}
-#splash.hidden .splash-bottom{transform:translateY(100%);}
-
-.splash-content{
-  position:relative;z-index:3;
-  text-align:center;
-  display:flex;flex-direction:column;align-items:center;gap:1.5rem;
-}
-.splash-name{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(3.5rem,10vw,9rem);
-  letter-spacing:0.12em;
-  color:var(--white);
-  overflow:hidden;
-  display:flex;gap:0.06em;
-}
-.splash-name span{
-  display:inline-block;
-  opacity:0;
-  transform:translateY(60px);
-  animation:splashLetter 0.6s cubic-bezier(0.22,1,0.36,1) forwards;
-}
-.splash-sub{
-  font-size:0.58rem;letter-spacing:0.38em;text-transform:uppercase;
-  color:var(--chrome-5);
-  opacity:0;
-  animation:splashFade 0.5s ease 1.2s forwards;
-}
-.splash-line{
-  width:0;height:1px;
-  background:linear-gradient(to right, transparent, var(--chrome-4), transparent);
-  animation:splashLine 0.7s ease 1s forwards;
-}
-.splash-enter{
-  margin-top:1rem;
-  font-size:0.52rem;letter-spacing:0.28em;text-transform:uppercase;
-  color:var(--chrome-5);
-  opacity:0;
-  animation:splashFade 0.5s ease 1.6s forwards;
-  cursor:pointer;
-  border:1px solid var(--border);
-  padding:0.7rem 2rem;
-  background:transparent;
-  color:var(--chrome-4);
-  font-family:'Space Mono',monospace;
-  transition:border-color 0.2s, color 0.2s;
-}
-.splash-enter:hover{border-color:var(--chrome-3);color:var(--white);}
-
-@keyframes splashLetter{
-  to{opacity:1;transform:translateY(0);}
-}
-@keyframes splashFade{
-  to{opacity:1;}
-}
-@keyframes splashLine{
-  to{width:240px;}
-}
 
 /* ── ABOUT SINGLE COL ── */
 .vibe-grid-single{max-width:680px;}
@@ -445,17 +368,6 @@ footer p{font-size:0.55rem;letter-spacing:0.14em;text-transform:uppercase;color:
 </head>
 <body>
 
-<div id="splash">
-  <div class="splash-top"></div>
-  <div class="splash-bottom"></div>
-  <div class="splash-content">
-    <div class="splash-name" id="splashName"></div>
-    <div class="splash-line"></div>
-    <p class="splash-sub">Data · Analytics · Engineering</p>
-    <button class="splash-enter" id="splashEnter" onclick="dismissSplash()">Enter Portfolio</button>
-  </div>
-</div>
-
 <div id="cursor"></div>
 <div id="cursor-ring"></div>
 <div class="scroll-line" id="scrollLine"></div>
@@ -463,7 +375,7 @@ footer p{font-size:0.55rem;letter-spacing:0.14em;text-transform:uppercase;color:
 <!-- NAV -->
 <nav>
   <a href="#hero" class="nav-logo">
-    <svg viewBox="0 0 152 192" height="34" fill="none" stroke="#EFEFEF" stroke-width="8" stroke-linecap="square" stroke-linejoin="miter" xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="0 0 152 192" height="34" fill="none" stroke="#1A1A1A" stroke-width="8" stroke-linecap="square" stroke-linejoin="miter" xmlns="http://www.w3.org/2000/svg">
       <!-- C as tall bracket -->
       <path d="M62,10 L10,10 L10,182 L62,182"/>
       <!-- P: stem + shoulder bowl -->
@@ -713,7 +625,7 @@ footer p{font-size:0.55rem;letter-spacing:0.14em;text-transform:uppercase;color:
   <h2 class="contact-headline reveal">LET'S<br/><span class="contact-outline">CONNECT</span></h2>
   <p class="reveal">Whether it's a project, an opportunity, or just talking data, reach out anytime.</p>
   <div class="contact-links reveal">
-    <a href="/cdn-cgi/l/email-protection#7d1e111c0e12130d1809180f3d1a101c1411531e1210" class="contact-link">Email</a>
+    <a href="mailto:clp00007@mix.wvu.edu" class="contact-link">Email</a>
     <a href="https://www.linkedin.com/in/clason-peter-b1b0a2253/" class="contact-link" target="_blank">LinkedIn</a>
     <a href="https://github.com/clasonpeter" class="contact-link" target="_blank">GitHub</a>
     <a href="997_ClasonPeter_Resume.pdf" class="contact-link" target="_blank">Resume</a>
@@ -726,27 +638,7 @@ footer p{font-size:0.55rem;letter-spacing:0.14em;text-transform:uppercase;color:
   <p>Data · Science · Engineering</p>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-/* SPLASH */
-document.body.style.overflow='hidden';
-(function(){
-  var name="CLASON PETER";
-  var container=document.getElementById('splashName');
-  name.split('').forEach(function(ch,i){
-    var s=document.createElement('span');
-    s.textContent=ch==='\u0020'?'\u00A0':ch;
-    s.style.animationDelay=(0.07*i+0.1)+'s';
-    container.appendChild(s);
-  });
-})();
-function dismissSplash(){
-  var sp=document.getElementById('splash');
-  sp.classList.add('hidden');
-  document.body.style.overflow='';
-}
-document.getElementById('splash').addEventListener('click', dismissSplash);
-document.addEventListener('keydown', dismissSplash);
-
+<script>
 /* CURSOR */
 var cursor=document.getElementById('cursor');
 var ring=document.getElementById('cursor-ring');
